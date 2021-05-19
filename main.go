@@ -6,6 +6,7 @@ import (
     "net/http"
     "encoding/json"
     "github.com/gorilla/mux"
+    "io/ioutil"
 )
 
 type Article struct {
@@ -42,13 +43,72 @@ func singleArticlePage(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+func deleteArticle(w http.ResponseWriter, r *http.Request) {
+    // parsing the path parameters
+    vars := mux.Vars(r)
+    // finding the id of the article we want to delete
+    key := vars["id"]
+
+    fmt.Println("Endpoint Hit: delete article", key)
+    for index, article := range Articles {
+        if article.Id == key {
+            //update the articles array to remove the article
+            Articles = append(Articles[:index], Articles[index+1:]...)
+        }
+    }
+
+    fmt.Fprintf(w, "Article %v Deleted", key)
+}
+
+func patchArticle(w http.ResponseWriter, r *http.Request) {
+    // parsing the path parameters
+    vars := mux.Vars(r)
+    // finding the id of the article we want to delete
+    key := vars["id"]
+
+    reqBody, _ := ioutil.ReadAll(r.Body)
+    var article Article
+    json.Unmarshal(reqBody, &article)
+    fmt.Fprintf(w, "%v", article)
+
+
+    fmt.Println("Endpoint Hit: patch article", key)
+    for index, article := range Articles {
+        if article.Id == key {
+            //update the articles array to remove the article
+            Articles = append(Articles[index], article)
+        }
+    }
+
+    /* fmt.Fprintf(w, "Article %v Patched", key) */
+}
+
+func createNewArticle(w http.ResponseWriter, r *http.Request) {
+    // get the body of our POST request
+    // unmarshal this into a new Article struct 
+    
+    reqBody, _ := ioutil.ReadAll(r.Body)
+    var article Article
+    json.Unmarshal(reqBody, &article)
+    //update our global Articles array to include our new article
+    Articles = append(Articles, article)
+
+    json.NewEncoder(w).Encode(article)
+}
+
 func handleRequests() {
     // creates a new instance of a mux router
     myRouter := mux.NewRouter().StrictSlash(true)
     
     myRouter.HandleFunc("/", homePage)
     myRouter.HandleFunc("/articles", articlesPage)
+    myRouter.HandleFunc("/article", createNewArticle).Methods("POST")
+    
+    myRouter.HandleFunc("/article/{id}", deleteArticle).Methods("DELETE")
+    myRouter.HandleFunc("/article/{id}", patchArticle).Methods("PUT")
     myRouter.HandleFunc("/article/{id}", singleArticlePage)
+    
+    
 
     log.Fatal(http.ListenAndServe(":10000", myRouter))
 }
