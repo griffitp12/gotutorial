@@ -2,6 +2,10 @@
     color: red
 }
 
+.dino {
+    color: rgb(21, 71, 21)
+}
+
 .content-container {
     border: 1px solid black
 }
