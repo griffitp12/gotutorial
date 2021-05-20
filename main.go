@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
+	/* "html/template" */
 	"github.com/gorilla/mux"
 )
 
@@ -17,7 +17,12 @@ func handleRequests() {
 	// creates a new instance of a mux router
 	myRouter := mux.NewRouter().StrictSlash(true)
 
-	myRouter.HandleFunc("/", HomePage)
+	fs := http.FileServer(http.Dir("static/"))
+    http.Handle("/static/", http.StripPrefix("/static/", fs))
+	
+    myRouter.HandleFunc("/", HomePage)
+
+	/* myRouter.HandleFunc("/", HomePage) */
 	myRouter.HandleFunc("/dinos", AllDinos).Methods("GET")
 	myRouter.HandleFunc("/dino/{name}/{food}", NewDino).Methods("POST")
     myRouter.HandleFunc("/dino/{name}", DeleteDino).Methods("DELETE")
@@ -31,6 +36,8 @@ func handleRequests() {
 }
 
 func main() {
+
+	
 	InitialMigration()
 	/* Articles = []Article{
 		Article{Id: "1", Title: "Hello", Desc: "Article Description", Content: "Article Content"},

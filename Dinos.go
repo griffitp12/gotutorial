@@ -21,6 +21,11 @@ type Dino struct {
     Food string
 }
 
+type AllDinoPageData struct {
+    PageTitle string
+    Dinos     []Dino
+}
+
 func InitialMigration() {
     DB, err := gorm.Open(postgres.Open(DSN), &gorm.Config{})
     if err != nil {

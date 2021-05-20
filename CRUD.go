@@ -1,15 +1,17 @@
 package main
 
 import (
-	"encoding/json"
+	/* "encoding/json" */
 	"fmt"
 	"github.com/gorilla/mux"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	/* "io/ioutil" */
 	"net/http"
+    "html/template"
 )
 
+var tmpl = template.Must(template.ParseFiles("static/index.html"))
 
 
 func AllDinos(w http.ResponseWriter, r *http.Request) {
@@ -20,7 +22,12 @@ func AllDinos(w http.ResponseWriter, r *http.Request) {
 
     var dinos []Dino
     DB.Find(&dinos)
-    json.NewEncoder(w).Encode(dinos)
+    /* json.NewEncoder(w).Encode(dinos) */
+    data := AllDinoPageData{
+		PageTitle: "My Dinos list",
+		Dinos: dinos,
+	}
+	tmpl.Execute(w, data)
 }
 
 func NewDino(w http.ResponseWriter, r *http.Request) {
