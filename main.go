@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
 	/* "html/template" */
 	"github.com/gorilla/mux"
 )
@@ -29,7 +30,7 @@ func handleRequests() {
 	// actual routed web endpoints
 
 	myRouter.HandleFunc("/", AllDinos)
-	myRouter.HandleFunc("/*.css", serveCss)
+	myRouter.HandleFunc("/styles.css", serveCss)
 	myRouter.HandleFunc("/adddino", AddDino)
 	myRouter.HandleFunc("/deletedino", DeleteDinoPageServe)
 

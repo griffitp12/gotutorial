@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
-    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <title>All Dinos</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
         <h1 class="title">{{.PageTitle}}</h1>
         <ul>
             {{range .Dinos}}
-            <li class="dino"><b>{{.Name}}</b> loves to eat {{.Food}}</li>
+            <li class="dino"><b>{{.Name}}</b> loves to eat all the {{.Food}}</li>
             {{end}}
         </ul>
     </div>
