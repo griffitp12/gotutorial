@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add A Dino!</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <div id="navbar">
+        <a href="/">AllDinos!</a>
+        <a href="/adddino">Add a Dino!</a>
+        <a href="/deletedino">Delete a Dino!</a>
+    </div>
+
+    <div class="content-container">
+    {{if .Success}}
+    <h1>Thanks for adding your dino!</h1>
+    {{else}}
+    <h1>Bring forth new life and be as the creator herself</h1>
+    <form method="POST">
+        <label>New Dino Name:</label><br />
+        <input type="text" name="name" required><br />
+        <label>What does the dino eat?</label><br />
+        <input type="text" name="food" required><br />
+        <input type="submit">
+    </form>
+    {{end}}
+    </div>
+</body>
+
+</html>

@@ -6,8 +6,10 @@ import (
 	/* "github.com/gorilla/mux" */
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	/* "io/ioutil" */
 	/* "net/http" */
+
 )
 
 
@@ -21,13 +23,20 @@ type Dino struct {
     Food string
 }
 
+/* type DinoDetails struct {
+    Name   string
+    Food string
+} */
+
 type AllDinoPageData struct {
     PageTitle string
     Dinos     []Dino
 }
 
 func InitialMigration() {
-    DB, err := gorm.Open(postgres.Open(DSN), &gorm.Config{})
+    DB, err := gorm.Open(postgres.Open(DSN), &gorm.Config{
+        Logger: logger.Default.LogMode(logger.Info),
+    })
     if err != nil {
         fmt.Println(err.Error())
         panic("Failed to connect to database")

@@ -30,35 +30,46 @@ func AllDinos(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, data)
 }
 
-func NewDino(w http.ResponseWriter, r *http.Request) {
+func AddDino(w http.ResponseWriter, r *http.Request) {
 	DB, err = gorm.Open(postgres.Open(DSN), &gorm.Config{})
     if err != nil {
         panic("could not connect to the database")
     }
+	
+	tmpl := template.Must(template.ParseFiles("static/add_a_dino.html"))
+	if r.Method != http.MethodPost {
+		tmpl.Execute(w, nil)
+		return
+	}
+	details := Dino{
+		Name:   r.FormValue("name"),
+		Food: r.FormValue("food"),	
+	}
 
-    vars := mux.Vars(r)
-    name := vars["name"]
-    food := vars["food"]
-
-    DB.Create(&Dino{Name: name, Food: food})
-
-    fmt.Fprintf(w, "New Dino successfully created")
+	DB.Create(&Dino{Name: details.Name, Food: details.Food})
+	tmpl.Execute(w, struct{ Success bool }{true})
 }
 
-func DeleteDino(w http.ResponseWriter, r *http.Request) {
+func DeleteDinoPageServe(w http.ResponseWriter, r *http.Request) {
 	DB, err = gorm.Open(postgres.Open(DSN), &gorm.Config{})
     if err != nil {
         panic("could not connect to the database")
     }
 
-    vars := mux.Vars(r)
-    name := vars["name"]
+    tmpl := template.Must(template.ParseFiles("static/delete_a_dino.html"))
+	if r.Method != http.MethodPost {
+		tmpl.Execute(w, nil)
+		return
+	}
+	details := Dino{
+		Name:   r.FormValue("Name"),
+	}
 
     var dino Dino
-    DB.Where("name = ?", name).Find(&dino)
+    DB.Where("Name = ?", details.Name).Find(&dino)
     DB.Delete(&dino)
 
-    fmt.Fprintf(w, "%v successfully deleted", dino.Name)
+    tmpl.Execute(w, struct{ Success bool }{true})
 }
 
 func UpdateDino(w http.ResponseWriter, r *http.Request) {

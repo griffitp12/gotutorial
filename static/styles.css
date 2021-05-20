@@ -1,7 +1,8 @@
-body {
-    background-color: blue
-}
 
 .title {
     color: red
+}
+
+.content-container {
+    border: 1px solid black
 }

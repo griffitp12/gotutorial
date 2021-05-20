@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete A Dino!</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <div id="navbar">
+        <a href="/">AllDinos!</a>
+        <a href="/adddino">Add a Dino!</a>
+        <a href="/deletedino">Delete a Dino!</a>
+    </div>
+    <div class="content-container">
+        {{if .Success}}
+        <h1>Your dino is now extinct!</h1>
+        {{else}}
+        <h1>Which Dino do you want to throw an asteroid at?</h1>
+        <form method="POST">
+            <label>Dino to delete</label><br />
+            <input type="text" name="Name" required><br />
+            <input type="submit">
+        </form>
+        {{end}}
+    </div>
+</body>
+
+</html>
