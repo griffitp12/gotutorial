@@ -1,9 +1,9 @@
 .title {
-    color: red
+    color: green
 }
 
 .dino {
-    color: rgb(21, 71, 21)
+    color: blue
 }
 
 .content-container {
@@ -11,5 +11,5 @@
 }
 
 body {
-    background-color: blanchedalmond;
+    background-color: hotpink;
 }
