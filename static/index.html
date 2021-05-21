@@ -10,19 +10,25 @@
 </head>
 
 <body>
-    <div id="navbar">
-        <a href="/">AllDinos!</a>
-        <a href="/adddino">Add a Dino!</a>
-        <a href="/deletedino">Delete a Dino!</a>
+    <div class="navbar">
+        <span class="linktext"><a href="/adddino">Add a Dino!</a></span>
+        <span class="linktext"><a href="/">AllDinos!</a></span>
+        <span class="linktext"><a href="/deletedino">Delete a Dino!</a></span>
     </div>
 
-    <div class="content-container">
-        <h1 class="title">{{.PageTitle}}</h1>
-        <ul>
-            {{range .Dinos}}
-            <li><strong><span class="dino">{{.Name}}</span></strong> loves to eat {{.Food}}</li>
-            {{end}}
-        </ul>
+    <div class="flex-container">
+        <div class="content-header">
+            <h1 class="title">{{.PageTitle}}</h1>
+        </div>
+
+        <br>
+        <div class="content-body">
+            <ul>
+                {{range .Dinos}}
+                <li><strong><span class="dino">{{.Name}}</span></strong> loves to eat {{.Food}}</li>
+                {{end}}
+            </ul>
+        </div>
     </div>
 
 </body>

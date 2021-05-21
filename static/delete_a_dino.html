@@ -10,21 +10,24 @@
 </head>
 
 <body>
-    <div id="navbar">
-        <a href="/">AllDinos!</a>
-        <a href="/adddino">Add a Dino!</a>
-        <a href="/deletedino">Delete a Dino!</a>
+    <div class="navbar">
+        <span class="linktext"><a href="/adddino">Add a Dino!</a></span>
+        <span class="linktext"><a href="/">AllDinos!</a></span>
+        <span class="linktext"><a href="/deletedino">Delete a Dino!</a></span>
     </div>
-    <div class="content-container">
+    <div class="flex-container">
         {{if .Success}}
         <h1>Your dino is now extinct!</h1>
         {{else}}
         <h1 class="title">Which Dino do you want to throw an asteroid at?</h1>
-        <form method="POST">
-            <label>Dino to delete</label><br />
-            <input type="text" name="Name" required><br />
-            <input type="submit">
-        </form>
+        <br>
+        <div class="content-body">
+            <form class="input-form" method="POST">
+                <label>Dino to delete</label><br />
+                <input type="text" name="Name" required><br />
+                <input type="submit">
+            </form>
+        </div>
         {{end}}
     </div>
 </body>

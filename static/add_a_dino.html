@@ -10,25 +10,29 @@
 </head>
 
 <body>
-    <div id="navbar">
-        <a href="/">AllDinos!</a>
-        <a href="/adddino">Add a Dino!</a>
-        <a href="/deletedino">Delete a Dino!</a>
+    <div class="navbar">
+        <span class="linktext"><a href="/adddino">Add a Dino!</a></span>
+        <span class="linktext"><a href="/">AllDinos!</a></span>
+        <span class="linktext"><a href="/deletedino">Delete a Dino!</a></span>
     </div>
 
-    <div class="content-container">
-    {{if .Success}}
-    <h1>Thanks for adding your dino!</h1>
-    {{else}}
-    <h1 class="title">Bring forth new life and be as the creator herself</h1>
-    <form method="POST">
-        <label for="name">New Dino Name:</label><br />
-        <input type="text" name="name" id="name" required><br />
-        <label for="food">What does the dino eat?</label><br />
-        <input type="text" name="food" id="food" required><br />
-        <input type="submit">
-    </form>
-    {{end}}
+    <div class="flex-container">
+        {{if .Success}}
+        <h1>Thanks for adding your dino!</h1>
+        {{else}}
+        <h1 class="title">Bring forth new life and be as the creator herself</h1>
+        <br>
+        <div class="content-body">
+            <form class="input-form" method="POST">
+                <label for="name">New Dino Name:</label><br />
+                <input type="text" name="name" id="name" required><br />
+                <label for="food">What does the dino eat?</label><br />
+                <input type="text" name="food" id="food" required><br />
+                <input type="submit">
+            </form>
+        </div>
+
+        {{end}}
     </div>
 </body>
 

@@ -6,10 +6,50 @@
     color: blue
 }
 
-.content-container {
-    border: 1px solid black
+.flex-container {
+    border: 1px solid black;
+    margin-top: 13vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 body {
     background-color: hotpink;
 }
+
+.navbar {
+    background-color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.linktext {
+    margin: 10px 30px
+}
+
+.input-form {
+    align-items: middle;
+}
+
+    a:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+    }
+    a:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+    }
+    a:hover {
+    color: hotpinkF;
+    background-color: transparent;
+    text-decoration: underline;
+    }
